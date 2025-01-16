@@ -189,7 +189,7 @@ const QuantitySelector2 = ({
                 className="object-scale-down max-w-[70px] h-auto"
                 alt="50% Discount Badge"
               />
-              <span className="absolute inset-0 flex flex-col items-center justify-center text-black font-bold">
+              <span className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold">
                 <span className="text-sm">50%</span>
                 <span className="text-xs">OFF</span>
               </span>
@@ -265,7 +265,7 @@ const QuantitySelector2 = ({
                 className="object-scale-down max-w-[70px] h-auto"
                 alt="56% Discount Badge"
               />
-              <span className="absolute inset-0 flex flex-col items-center justify-center text-black font-bold">
+              <span className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold">
                 <span className="text-sm">56%</span>
                 <span className="text-xs">OFF</span>
               </span>
@@ -336,7 +336,7 @@ const QuantitySelector2 = ({
                 className="object-scale-down max-w-[70px] h-auto"
                 alt="58% Discount Badge"
               />
-              <span className="absolute inset-0 flex flex-col items-center justify-center text-black font-bold">
+              <span className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold">
                 <span className="text-sm">58%</span>
                 <span className="text-xs">OFF</span>
               </span>
@@ -407,7 +407,7 @@ const QuantitySelector2 = ({
                 className="object-scale-down max-w-[70px] h-auto"
                 alt="58% Discount Badge"
               />
-              <span className="absolute inset-0 flex flex-col items-center justify-center text-black font-bold">
+              <span className="absolute inset-0 flex flex-col items-center justify-center text-white font-bold">
                 <span className="text-sm">60%</span>
                 <span className="text-xs">OFF</span>
               </span>

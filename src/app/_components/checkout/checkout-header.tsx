@@ -18,7 +18,7 @@ const CheckoutHeader = ({ info }: Props) => {
           priority
         />
         <div className="flex w-full justify-center z-10 py-4">
-          <div className="flex w-full max-w-[1100px] px-4 flex-col lg:flex-row">
+          <div className="flex w-full max-w-[1180px] px-4 flex-col lg:flex-row">
             <div className="hidden lg:flex w-1/2 justify-start items-center">
               <Image
                 src={info.header.product}
@@ -28,7 +28,7 @@ const CheckoutHeader = ({ info }: Props) => {
                 priority
               />
             </div>
-            <div className="flex w-full lg:w-1/2 lg:justify-end justify-center items-center space-x-2 lg:space-x-0 ">
+            <div className="flex w-full lg:w-1/2 justify-end items-center space-x-2 lg:space-x-0 ">
               <Image
                 src={info.header.logo}
                 alt={siteProduct}
