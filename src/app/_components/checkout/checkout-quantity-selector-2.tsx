@@ -170,7 +170,7 @@ const QuantitySelector2 = ({
           />
 
           <span className="absolute left-[0px] ml-10 mt-2 text-[17px] font-bold text-black">
-            Buy 1 Sachet
+            Buy 1 Pack
           </span>
           <div className="flex w-1/3 sm:w-auto justify-start items-center">
             <Image
@@ -246,7 +246,7 @@ const QuantitySelector2 = ({
           />
 
           <span className="absolute left-[0px] ml-10 mt-2 text-[17px] font-bold text-black">
-            Buy 2 Sachets
+            Buy 2 Packets
           </span>
           <div className="flex w-1/3 sm:w-auto justify-start items-center">
             <Image
@@ -317,7 +317,7 @@ const QuantitySelector2 = ({
           />
 
           <span className="absolute left-[0px] ml-10 mt-2 text-[17px] font-bold text-black">
-            Buy 3 Sachets
+            Buy 3 Packets
           </span>
           <div className="flex w-1/3 sm:w-auto justify-start items-center">
             <Image
@@ -388,7 +388,7 @@ const QuantitySelector2 = ({
           />
 
           <span className="absolute left-[0px] ml-10 mt-2 text-[17px] font-bold text-black">
-            Buy 4 Sachets
+            Buy 4 Packets
           </span>
           <div className="flex w-1/3 sm:w-auto justify-start items-center">
             <Image
