@@ -332,11 +332,7 @@ const PaymentOptions2 = ({
             />
             <label className="ml-2 text-[14px]">
               Billing & Shipping address are the same
-              <PriceDisplaySimple
-                priceUSD={parseFloat(product.productShipping)}
-                countryCode={country}
-                digits={2}
-              />
+
             </label>
           </div>
           <div>
