@@ -7,11 +7,11 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ProductInfoType } from "@/interfaces/productInfo";
 import { CustomerInfoType } from "@/interfaces/customerInfo";
-import DiscountBar from "./checkout-discount-bar";
+import DiscountBar2 from "./checkout-discount-bar-2";
 import QuantitySelector2 from "./checkout-quantity-selector-2";
 import CustomerInfo2 from "./checkout-customer-info-2";
 import PaymentOptions2 from "./checkout-payment-options-2";
-import MobilePaymentOptions from "./checkout-mobile-payment-options-2";
+import MobilePaymentOptions2 from "./checkout-mobile-payment-options-2";
 import CheckoutCouponPop from "./checkout-coupon-pop";
 import PaypalPop from "./checkout-paypal-pop";
 import { delay } from "@/app/_utils/delay";
@@ -435,11 +435,11 @@ const CheckoutForm2 = ({ info }: Props) => {
         product={product}
       />
       <div className="flex  w-full relative flex-col items-center bg-white">
-        <div id="payment-container max-w-[1100px]" />
-        <div className="flex w-full pb-12 flex-wrap">
-          <div className="flex flex-col w-full ml-8 px-16 lg:w-1/2 lg:pb-8 pt-4 sm:pt-8 pb-4">
-            <div className="rounded-lg bg-[#fff1af] p-4">
-              <DiscountBar
+        <div id="payment-container" />
+        <div className="flex w-full  max-w-[1180px] pb-12 flex-wrap">
+          <div className="flex flex-col w-full lg:mr-[30px] lg:w-1/2">
+            <div className="p-4">
+              <DiscountBar2
                 product={product.product}
                 info={info}
                 couponActive={customerInfo.couponActive}
@@ -455,9 +455,17 @@ const CheckoutForm2 = ({ info }: Props) => {
                 country={country}
               />
             </div>
-            <div className="bg-white p-4">
-              <MobilePaymentOptions firePaypal={firePaypal} loading={loading} />
+            <div className="p-4">
+              <div className="relative border-[2px] border-[#c2c2c2] rounded-md mt-6 mb-6 justify-center items-center">
+                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 flex items-center bg-white rounded py-1 px-3 text-center text-[16px] font-light text-black">
+                  Express Checkout
+                </div>
+                <div className="flex justify-center items-center h-full w-full">
+                  <MobilePaymentOptions2 firePaypal={firePaypal} loading={loading} />
+                </div>
+              </div>
             </div>
+
             <div className="bg-white p-4">
               <CustomerInfo2 formik={formik} />
             </div>
@@ -473,7 +481,9 @@ const CheckoutForm2 = ({ info }: Props) => {
               />
             </div>
           </div>
+
         </div>
+
         <CheckoutCouponPop
           info={info}
           activateCoupon={activateCoupon}

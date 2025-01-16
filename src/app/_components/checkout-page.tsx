@@ -1,5 +1,6 @@
 import React from "react";
 import CheckoutHeader from "./checkout/checkout-header";
+import CheckoutHeader2 from "./checkout/checkout-header-2";
 import CheckoutForm from "./checkout/checkout-form";
 import CheckoutForm2 from "./checkout/checkout-form-2";
 import Footer from "./checkout/checkout-footer";
@@ -33,7 +34,7 @@ const CheckoutPage = ({ info }: Props) => {
       )}
       {info.template === "2" && (
         <div className="flex flex-col items-center relative">
-          <CheckoutHeader info={info} />
+          <CheckoutHeader2 info={info} />
           <CheckoutForm2 info={info} />
           <Footer info={info} />
           <FunnelFluxScripts funnelFlux={info.funnelFlux} />

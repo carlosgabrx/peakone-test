@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   GlobeAmericasIcon,
@@ -7,8 +7,9 @@ import {
 } from "@heroicons/react/24/solid";
 import { CheckoutPageType } from "@/interfaces/checkoutPage";
 import { ProductInfoType } from "@/interfaces/productInfo";
-import StateProvinceSelect from "./checkout-state-selector";
+import StateProvinceSelect2 from "./checkout-state-selector-2";
 import { PriceDisplaySimple } from "./checkout-price-display";
+
 
 type PaymentProps = {
   info: CheckoutPageType;
@@ -104,6 +105,13 @@ const PaymentOptions2 = ({
     setCountry(selectedCountry); // Update local state
   };
 
+  const [showAddressForm, setShowAddressForm] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setShowAddressForm(!showAddressForm);
+  };
+
+
   return (
     <>
       {loading && (
@@ -193,207 +201,273 @@ const PaymentOptions2 = ({
           </div>
         </div>
       )}
-
-      <div className="hidden lg:flex w-full justify-start items-center pb-4">
-        <GlobeAmericasIcon className="h-[30px] w-[30px] mr-2" />
-        <h3 className="font-bold text-[20px]">Step 3: Payment Options</h3>
+      <div className="flex items-center w-full">
+        <Image
+          src="https://www.oriclehearing.com/hear/app/desktop/images-chk-v3/frm-hdr-icn3.png"
+          width={50}
+          height={40}
+          alt=""
+        />
+        <div className="ml-2 flex flex-col">
+          <h3 className="font-bold text-[26px]">Shipping Information</h3>
+          <h3 className="text-[14px]">
+            Where do we send your products?
+          </h3>
+        </div>
       </div>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="hidden lg:flex w-full justify-start">
-          <input
-            type="radio"
-            checked
-            className="mr-2 cursor-pointer"
-            readOnly
-          />{" "}
-          <div className="flex w-[278px] border-[1px] border-[#1ac70e] rounded-md  px-4 py-2 h-[44px] cursor-pointer overflow-hidden space-x-2 hover:bg-[#ddd]">
-            <Image
-              src="https://imagedelivery.net/3TTaU3w9z1kOYYtN3czCnw/60ac8520-9b26-4b76-8cf0-4d4fd5d52800/public"
-              width={50}
-              height={20}
-              alt="Visa"
-              className="object-scale-down w-1/3"
-            />
-
-            <Image
-              src="https://imagedelivery.net/3TTaU3w9z1kOYYtN3czCnw/e95314d5-1adc-477b-1631-38162b91ad00/public"
-              width={50}
-              height={20}
-              alt="Mastercard"
-              className="object-scale-down  w-1/3 border-r-[1px] border-l-[1px] px-2 border-[#ccc]"
-            />
-
-            <Image
-              src="https://imagedelivery.net/3TTaU3w9z1kOYYtN3czCnw/5e7d79a8-f00e-4ea8-7aac-3484c20e7e00/public"
-              width={50}
-              height={20}
-              alt="American Express"
-              className="object-scale-down  w-1/3"
-            />
+      <div className="flex w-full space-x-4 mt-4">
+        <div className="flex w-full flex-col items-start justify-start relative">
+          <label className="font-medium text-[16px] pb-2">Country</label>
+          <div className="relative w-full">
+            <select
+              onChange={handleCountryChange}
+              className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] sm:text-[14px] rounded-md bg-white"
+              value={formik.values.country}
+              name="country"
+            >
+              <option value="US">United States</option>
+              <option value="AU">Australia</option>
+              <option value="CA">Canada</option>
+              <option value="FI">Finland</option>
+              <option value="FR">France</option>
+              <option value="DE">Germany</option>
+              <option value="IS">Iceland</option>
+              <option value="IE">Ireland</option>
+              <option value="IL">Israel</option>
+              <option value="NZ">New Zealand</option>
+              <option value="NO">Norway</option>
+              <option value="SE">Sweden</option>
+              <option value="GB">United Kingdom</option>
+            </select>
+            <span className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <ChevronDownIcon className="w-4 h-4 text-[#555] " />
+            </span>
           </div>
         </div>
-        <div className="hidden lg:flex w-full justify-start mt-2 mb-4">
+      </div>
+      <div className="flex w-full space-x-4 mt-6">
+        <div className="flex w-full flex-col items-start justify-start">
+          <label className="font-medium text-[16px] pb-2">
+            Delivery Address
+          </label>
           <input
-            type="radio"
-            checked={false}
-            className="mr-2 cursor-pointer  "
-            readOnly
-            onClick={() => {
-              if (loading === "") {
-                firePaypal();
-              }
-            }}
-          />{" "}
-          <div
-            className="flex w-[278px] border-[1px] border-[#ffc439] bg-[#ffc439] rounded-md  px-4 py-2 h-[44px] cursor-pointer overflow-hidden space-x-2 hover:bg-[#ffde3a] hover:border-[#ffde3a]"
-            onClick={() => {
-              if (loading === "") {
-                firePaypal();
-              }
-            }}
-          >
-            <Image
-              src="https://imagedelivery.net/3TTaU3w9z1kOYYtN3czCnw/1397951e-7288-4b95-8ef1-b1f423b56c00/public"
-              width={278}
-              height={44}
-              alt="Paypal"
-              className="cursor-pointer hover:brightness-110 object-scale-down "
-            />
-          </div>
-        </div>
-        <div className="hidden lg:block h-[1px] w-full bg-[#ddd] mt-2 mb-4" />
-        <div className="flex w-full justify-start items-center">
-          <LockClosedIcon className="h-[30px] w-[30px] mr-2" />
-          <h3 className="font-bold text-[20px]">Step 4: Delivery Address</h3>
-        </div>
-        <div className="flex w-full space-x-4 mt-4">
-          <div className="flex w-full flex-col items-start justify-start relative">
-            <label className="font-bold text-[14px] pb-2">Country</label>
-            <div className="relative w-full">
-              <select
-                onChange={handleCountryChange}
-                className="w-full border-[1px] border-[#333]  px-4 py-2 text-[16px] sm:text-[14px] rounded-md bg-white"
-                value={formik.values.country}
-                name="country"
-              >
-                <option value="US">United States</option>
-                <option value="AU">Australia</option>
-                <option value="CA">Canada</option>
-                <option value="FI">Finland</option>
-                <option value="FR">France</option>
-                <option value="DE">Germany</option>
-                <option value="IS">Iceland</option>
-                <option value="IE">Ireland</option>
-                <option value="IL">Israel</option>
-                <option value="NZ">New Zealand</option>
-                <option value="NO">Norway</option>
-                <option value="SE">Sweden</option>
-                <option value="GB">United Kingdom</option>
-              </select>
-              <span className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-                <ChevronDownIcon className="w-4 h-4 text-[#555] " />
-              </span>
+            type="text"
+            name="address"
+            ref={addressInputRef}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.address}
+            className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] mb-2 rounded-md"
+            placeholder="Address"
+          />
+          {formik.touched.address && formik.errors.address ? (
+            <div className="text-red-500 text-xs">
+              {formik.errors.address}
             </div>
-          </div>
+          ) : null}
+          <input
+            type="text"
+            name="address2"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.address2}
+            className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px]  rounded-md"
+            placeholder="Apartment, suite, etc. (optional)"
+          />
         </div>
-        <div className="flex w-full space-x-4 mt-6">
-          <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">
-              Delivery Address
-            </label>
-            <input
-              type="text"
-              name="address"
-              ref={addressInputRef}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.address}
-              className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] mb-2 rounded-md"
-              placeholder="Address"
-            />
-            {formik.touched.address && formik.errors.address ? (
-              <div className="text-red-500 text-xs">
-                {formik.errors.address}
-              </div>
-            ) : null}
-            <input
-              type="text"
-              name="address2"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.address2}
-              className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px]  rounded-md"
-              placeholder="Apartment, suite, etc. (optional)"
-            />
-          </div>
+      </div>
+      <div className="flex w-full space-x-4 mt-6">
+        <div className="flex w-full flex-col items-start justify-start">
+          <label className="font-medium text-[16px] pb-2">City</label>
+          <input
+            type="text"
+            name="city"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.city}
+            className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md"
+            placeholder="City"
+          />
+          {formik.touched.city && formik.errors.city ? (
+            <div className="text-red-500 text-xs">{formik.errors.city}</div>
+          ) : null}
         </div>
-        <div className="flex w-full space-x-4 mt-6">
-          <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">City</label>
-            <input
-              type="text"
-              name="city"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.city}
-              className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md"
-              placeholder="City"
-            />
-            {formik.touched.city && formik.errors.city ? (
-              <div className="text-red-500 text-xs">{formik.errors.city}</div>
-            ) : null}
-          </div>
+      </div>
+      <div className="flex w-full space-x-4 mt-4">
+        <div className="flex w-1/2 flex-col items-start justify-start relative">
+          <StateProvinceSelect2 formik={formik} country={country} />
+          {formik.touched.state && formik.errors.state ? (
+            <div className="text-red-500 text-xs">{formik.errors.state}</div>
+          ) : null}
+        </div>{" "}
+        <div className="flex w-1/2 flex-col items-start justify-start">
+          <label className="font-medium text-[16px] pb-2">
+            {(country === "US" && "Zip Code") || "Postal Code"}
+          </label>
+          <input
+            type="text"
+            name="zip"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.zip}
+            className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md"
+            placeholder={(country === "US" && "Zip Code") || "Postal Code"}
+          />
+          {formik.touched.zip && formik.errors.zip ? (
+            <div className="text-red-500 text-xs">{formik.errors.zip}</div>
+          ) : null}
         </div>
-        <div className="flex w-full space-x-4 mt-4">
-          <div className="flex w-1/2 flex-col items-start justify-start relative">
-            <StateProvinceSelect formik={formik} country={country} />
-            {formik.touched.state && formik.errors.state ? (
-              <div className="text-red-500 text-xs">{formik.errors.state}</div>
-            ) : null}
-          </div>{" "}
-          <div className="flex w-1/2 flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">
-              {(country === "US" && "Zip Code") || "Postal Code"}
-            </label>
+      </div>
+      <div className="flex w-full space-x-4 mt-6">
+        <div className="flex w-full flex-col items-start justify-start">
+          <label className="font-medium text-[16px] pb-2">Shipping</label>
+          <div className="flex">
             <input
-              type="text"
-              name="zip"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.zip}
-              className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md"
-              placeholder={(country === "US" && "Zip Code") || "Postal Code"}
+              type="checkbox"
+              className="w-4 h-4 cursor-pointer accent-black"
+              id="showAddressForm"
+              checked={!showAddressForm}
+              onChange={handleCheckboxChange}
+              readOnly
             />
-            {formik.touched.zip && formik.errors.zip ? (
-              <div className="text-red-500 text-xs">{formik.errors.zip}</div>
-            ) : null}
-          </div>
-        </div>
-        <div className="flex w-full space-x-4 mt-6">
-          <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Shipping</label>
-            <div className="flex">
-              <input
-                type="radio"
-                name="shipping"
-                defaultChecked
-                value={"1"}
-                className="mr-2"
+            <label className="ml-2 text-[14px]">
+              Billing & Shipping address are the same
+              <PriceDisplaySimple
+                priceUSD={parseFloat(product.productShipping)}
+                countryCode={country}
+                digits={2}
               />
-              <label className="text-[14px]">
-                Standard{" "}
-                <PriceDisplaySimple
-                  priceUSD={parseFloat(product.productShipping)}
-                  countryCode={country}
-                  digits={2}
-                />
-              </label>
-            </div>
+            </label>
           </div>
+          <div>
+            {showAddressForm && (
+              <>
+                <div className="flex w-full space-x-4 mt-4">
+                  <div className="flex w-full flex-col items-start justify-start relative">
+                    <label className="font-medium text-[16px] pb-2">Country</label>
+                    <div className="relative w-full">
+                      <select
+                        onChange={handleCountryChange}
+                        className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md bg-white"
+                        value={formik.values.country}
+                        name="country"
+                      >
+                        <option value="US">United States</option>
+                        <option value="AU">Australia</option>
+                        <option value="CA">Canada</option>
+                        <option value="FI">Finland</option>
+                        <option value="FR">France</option>
+                        <option value="DE">Germany</option>
+                        <option value="IS">Iceland</option>
+                        <option value="IE">Ireland</option>
+                        <option value="IL">Israel</option>
+                        <option value="NZ">New Zealand</option>
+                        <option value="NO">Norway</option>
+                        <option value="SE">Sweden</option>
+                        <option value="GB">United Kingdom</option>
+                      </select>
+                      <span className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                        <ChevronDownIcon className="w-4 h-4 text-[#555]" />
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex w-full space-x-4 mt-6">
+                  <div className="flex w-full flex-col items-start justify-start">
+                    <label className="font-medium text-[16px] pb-2">Delivery Address</label>
+                    <input
+                      type="text"
+                      name="address"
+                      ref={addressInputRef}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.address}
+                      className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] mb-2 rounded-md"
+                      placeholder="Address"
+                    />
+                    {formik.touched.address && formik.errors.address ? (
+                      <div className="text-red-500 text-xs">{formik.errors.address}</div>
+                    ) : null}
+                    <input
+                      type="text"
+                      name="address2"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.address2}
+                      className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md"
+                      placeholder="Apartment, suite, etc. (optional)"
+                    />
+                  </div>
+                </div>
+
+                <div className="flex w-full space-x-4 mt-6">
+                  <div className="flex w-full flex-col items-start justify-start">
+                    <label className="font-medium text-[16px] pb-2">City</label>
+                    <input
+                      type="text"
+                      name="city"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.city}
+                      className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md"
+                      placeholder="City"
+                    />
+                    {formik.touched.city && formik.errors.city ? (
+                      <div className="text-red-500 text-xs">{formik.errors.city}</div>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="flex w-full space-x-4 mt-4">
+                  <div className="flex w-1/2 flex-col items-start justify-start relative">
+                    <StateProvinceSelect2 formik={formik} country={country} />
+                    {formik.touched.state && formik.errors.state ? (
+                      <div className="text-red-500 text-xs">{formik.errors.state}</div>
+                    ) : null}
+                  </div>
+                  <div className="flex w-1/2 flex-col items-start justify-start">
+                    <label className="font-medium text-[16px] pb-2">
+                      {(country === "US" && "Zip Code") || "Postal Code"}
+                    </label>
+                    <input
+                      type="text"
+                      name="zip"
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.zip}
+                      className="w-full border-[1px] border-[#333] px-4 py-2 text-[16px] sm:text-[14px] rounded-md"
+                      placeholder={(country === "US" && "Zip Code") || "Postal Code"}
+                    />
+                    {formik.touched.zip && formik.errors.zip ? (
+                      <div className="text-red-500 text-xs">{formik.errors.zip}</div>
+                    ) : null}
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
         </div>
+      </div>
+      <div className="flex items-center w-full mt-8">
+        <Image
+          src="https://www.oriclehearing.com/hear/app/desktop/images-chk-v3/frm-hdr-icn4.png"
+          width={50}
+          height={40}
+          alt=""
+        />
+        <div className="ml-2 flex flex-col">
+          <h3 className="font-bold text-[26px]">Payment Information</h3>
+          <h3 className="text-[14px]">
+            Safe & Secure Checkout
+          </h3>
+        </div>
+      </div>
+
+      <form onSubmit={formik.handleSubmit}>
         <div className="flex w-full space-x-4 mt-6">
           <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Card Number</label>
+            <label className="font-medium text-[16px] pb-2">Card Number</label>
             <input
               type="text"
               name="card"
@@ -412,7 +486,7 @@ const PaymentOptions2 = ({
         </div>
         <div className="flex w-full space-x-4 mt-4">
           <div className="flex w-1/2 flex-col items-start justify-start relative">
-            <label className="font-bold text-[14px] pb-2">Expiry Month</label>
+            <label className="font-medium text-[16px] pb-2">Expiry Month</label>
             <div className="relative w-full">
               <select
                 name="month"
@@ -446,7 +520,7 @@ const PaymentOptions2 = ({
             ) : null}
           </div>
           <div className="flex w-1/2 flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Expiry Year</label>
+            <label className="font-medium text-[16px] pb-2">Expiry Year</label>
             <div className="relative w-full">
               <select
                 name="year"
@@ -492,7 +566,7 @@ const PaymentOptions2 = ({
         </div>
         <div className="flex w-full space-x-4 mt-6 mb-6">
           <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">CVV</label>
+            <label className="font-medium text-[16px] pb-2">CVV</label>
             <input
               type="text"
               name="cvv"
@@ -509,6 +583,11 @@ const PaymentOptions2 = ({
             ) : null}
           </div>
         </div>
+
+
+        <div className="hidden lg:block h-[1px] w-full bg-[#ddd] mt-2 mb-4" />
+
+
         <p className="text-[14px] text-[#a1a1a1]">
           By placing this order you agree to {info.product.name}{" "}
           <a

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { UserIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
+
 
 type CustomerInfoProps = {
   formik: any;
@@ -59,19 +61,24 @@ const CustomerInfo2 = ({ formik }: CustomerInfoProps) => {
 
   return (
     <>
-      <div className="flex w-full justify-start items-center pb-6">
-        <UserIcon className="h-[30px] w-[30px] mr-2" />
-        <h3 className="font-bold text-[20px] hidden lg:block">
-          Step 2: Customer Information
-        </h3>
-        <h3 className="font-bold text-[16px] lg:hidden">
-          Step 3: Customer Information
-        </h3>
+      <div className="flex items-center w-full">
+        <Image
+          src="https://www.oriclehearing.com/hear/app/desktop/images-chk-v3/frm-hdr-icn2.png"
+          width={50}
+          height={40}
+          alt=""
+        />
+        <div className="ml-2 flex flex-col mb-4">
+          <h3 className="font-bold text-[26px]">Costumer Information</h3>
+          <h3 className="text-[14px]">
+            Order Confirmation Details Will Be Sent Here
+          </h3>
+        </div>
       </div>
       <form onSubmit={formik.handleSubmit}>
         <div className="flex w-full space-x-4">
           <div className="flex w-1/2 flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">First Name</label>
+            <label className="font-medium text-[16px] pb-2">First Name</label>
             <input
               type="text"
               name="firstName"
@@ -90,7 +97,7 @@ const CustomerInfo2 = ({ formik }: CustomerInfoProps) => {
             ) : null}
           </div>
           <div className="flex w-1/2 flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Last Name</label>
+            <label className="font-medium text-[16px] pb-2">Last Name</label>
             <input
               type="text"
               name="lastName"
@@ -111,7 +118,7 @@ const CustomerInfo2 = ({ formik }: CustomerInfoProps) => {
         </div>
         <div className="flex w-full space-x-4 mt-6">
           <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Email Address</label>
+            <label className="font-medium text-[16px] pb-2">Email Address</label>
             <input
               type="email"
               name="email"
@@ -130,7 +137,7 @@ const CustomerInfo2 = ({ formik }: CustomerInfoProps) => {
         </div>
         <div className="flex w-full space-x-4 mt-6 mb-6">
           <div className="flex w-full flex-col items-start justify-start">
-            <label className="font-bold text-[14px] pb-2">Phone Number</label>
+            <label className="font-medium text-[16px] pb-2">Phone Number</label>
             <input
               type="text"
               name="phone"
